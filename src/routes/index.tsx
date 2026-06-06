@@ -76,8 +76,8 @@ function Home() {
         <div className="bg-charcoal-deep text-white/80">
           <div className="mx-auto flex h-9 max-w-[1600px] items-center justify-between px-6 font-mono text-[11px] uppercase tracking-[0.18em]">
             <div className="flex items-center gap-6">
-              <span className="flex items-center gap-2"><Globe className="h-3 w-3 text-accent" /> Global · EN</span>
-              <span className="hidden md:flex items-center gap-2 text-white/50"><Phone className="h-3 w-3" /> +1 (800) 555-0142 · 24/7 Procurement Desk</span>
+              <span className="flex items-center gap-2"><Globe className="h-3 w-3 text-accent" /> UK · EN-GB · GBP</span>
+              <span className="hidden md:flex items-center gap-2 text-white/50"><Phone className="h-3 w-3" /> +44 (0)161 818 7420 · Mon–Fri 07:30–18:00 GMT</span>
             </div>
             <div className="flex items-center gap-6">
               <button className="flex items-center gap-1.5 text-white/70 transition-colors hover:text-accent">
