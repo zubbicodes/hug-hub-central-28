@@ -66,28 +66,28 @@ function LoginPage() {
     <div className="min-h-screen bg-background text-ink">
       <SiteHeader />
 
-      <main className="mx-auto grid max-w-[1180px] gap-8 px-6 py-12 lg:grid-cols-[0.9fr_1.1fr]">
-        <section className="flex min-h-[520px] flex-col justify-between border border-rule bg-charcoal p-8 text-white md:p-10">
+      <main className="mx-auto grid max-w-[1180px] gap-6 px-4 py-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8 lg:px-6 lg:py-12">
+        <section className="flex min-h-[400px] md:min-h-[520px] flex-col justify-between border border-rule bg-charcoal p-6 text-white md:p-8 lg:p-10">
           <div>
             <Link
-              to="/products"
+              to="/"
               className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 transition-colors hover:text-accent"
             >
-              <ArrowLeft className="h-4 w-4" /> Back to catalogue
+              <ArrowLeft className="h-4 w-4" /> Back to home
             </Link>
-            <div className="mt-16 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+            <div className="mt-12 md:mt-16 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
               Trade Customer Access
             </div>
-            <h1 className="mt-4 font-display text-5xl font-extrabold uppercase leading-none tracking-tight">
+            <h1 className="mt-4 font-display text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase leading-none tracking-tight">
               Sign In
             </h1>
-            <p className="mt-6 max-w-md text-sm leading-7 text-white/55">
+            <p className="mt-4 md:mt-6 max-w-md text-sm leading-7 text-white/55">
               Sign in directly to your Spares Automation account.
             </p>
           </div>
         </section>
 
-        <section className="border border-rule bg-surface p-6 md:p-8">
+        <section className="border border-rule bg-surface p-5 md:p-6 lg:p-8">
           <div className="mb-8 flex h-12 w-12 items-center justify-center bg-accent text-accent-foreground">
             <User className="h-5 w-5" />
           </div>

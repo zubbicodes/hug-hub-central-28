@@ -93,22 +93,22 @@ function RegisterPage() {
     <div className="min-h-screen bg-background text-ink">
       <SiteHeader />
 
-      <main className="mx-auto grid max-w-[1180px] gap-8 px-6 py-12 lg:grid-cols-[0.9fr_1.1fr]">
-        <section className="flex min-h-[520px] flex-col justify-between border border-rule bg-charcoal p-8 text-white md:p-10">
+      <main className="mx-auto grid max-w-[1180px] gap-6 px-4 py-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-8 lg:px-6 lg:py-12">
+        <section className="flex min-h-[400px] md:min-h-[520px] flex-col justify-between border border-rule bg-charcoal p-6 text-white md:p-8 lg:p-10">
           <div>
             <Link
-              to="/products"
+              to="/"
               className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 transition-colors hover:text-accent"
             >
-              <ArrowLeft className="h-4 w-4" /> Back to catalogue
+              <ArrowLeft className="h-4 w-4" /> Back to home
             </Link>
-            <div className="mt-16 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+            <div className="mt-12 md:mt-16 font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
               Trade Customer Access
             </div>
-            <h1 className="mt-4 font-display text-5xl font-extrabold uppercase leading-none tracking-tight">
+            <h1 className="mt-4 font-display text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase leading-none tracking-tight">
               Create Your Account
             </h1>
-            <p className="mt-6 max-w-md text-sm leading-7 text-white/55">
+            <p className="mt-4 md:mt-6 max-w-md text-sm leading-7 text-white/55">
               Create your Spares Automation account to unlock exclusive trade pricing, 
               faster checkout, and full visibility of your order history.
             </p>
@@ -120,7 +120,7 @@ function RegisterPage() {
           </div>
         </section>
 
-        <section className="border border-rule bg-surface p-6 md:p-8">
+        <section className="border border-rule bg-surface p-5 md:p-6 lg:p-8">
           <div className="mb-8 flex h-12 w-12 items-center justify-center bg-accent text-accent-foreground">
             <UserPlus className="h-5 w-5" />
           </div>
@@ -397,11 +397,11 @@ function PhoneField() {
       <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
         Phone number
       </span>
-      <div className="grid grid-cols-[220px_1fr] border border-rule bg-background focus-within:border-accent">
+      <div className="grid grid-cols-[140px_1fr] md:grid-cols-[200px_1fr] border border-rule bg-background focus-within:border-accent">
         <select
           name="countryCode"
           defaultValue="+44"
-          className="h-12 border-r border-rule bg-background px-3 text-sm text-ink outline-none"
+          className="h-12 border-r border-rule bg-background px-3 text-xs md:text-sm text-ink outline-none"
           aria-label="Phone country code"
         >
           {COUNTRIES.map((country) => (
@@ -416,7 +416,7 @@ function PhoneField() {
           autoComplete="tel-national"
           inputMode="tel"
           placeholder="07911 123456"
-          className="h-12 bg-transparent px-4 text-sm text-ink outline-none placeholder:text-ink-muted"
+          className="h-12 bg-transparent px-3 md:px-4 text-sm text-ink outline-none placeholder:text-ink-muted"
         />
       </div>
       <span className="text-xs leading-5 text-ink-muted">

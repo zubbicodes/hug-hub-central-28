@@ -15,7 +15,7 @@ export function ProductCard({ product }: ProductCardProps) {
     product.variants.find((variant) => variant.availableForSale) ?? product.variants[0];
 
   return (
-    <article className="group flex min-h-[420px] flex-col border border-rule bg-surface transition-colors hover:border-accent/50">
+    <article className="group flex min-h-[360px] md:min-h-[400px] lg:min-h-[420px] flex-col border border-rule bg-surface transition-colors hover:border-accent/50">
       <Link to="/products/$handle" params={{ handle: product.handle }} className="block">
         <div className="relative aspect-square overflow-hidden bg-[oklch(0.96_0.005_250)]">
           {product.featuredImage ? (
@@ -30,40 +30,40 @@ export function ProductCard({ product }: ProductCardProps) {
               Image Pending
             </div>
           )}
-          <div className="absolute left-4 top-4 bg-charcoal-deep px-3 py-1 font-mono text-[9px] uppercase tracking-[0.22em] text-white/70">
+          <div className="absolute left-3 top-3 md:left-4 md:top-4 bg-charcoal-deep px-2 md:px-3 py-1 font-mono text-[8px] md:text-[9px] uppercase tracking-[0.22em] text-white/70">
             {product.productType || product.vendor || "Spares"}
           </div>
-          <div className="absolute bottom-4 right-4 flex h-9 w-9 items-center justify-center bg-charcoal-deep text-accent opacity-0 transition-opacity group-hover:opacity-100">
-            <ChevronRight className="h-4 w-4" />
+          <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 flex h-8 w-8 md:h-9 md:w-9 items-center justify-center bg-charcoal-deep text-accent opacity-0 transition-opacity group-hover:opacity-100">
+            <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
           </div>
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 md:p-5">
         <Link to="/products/$handle" params={{ handle: product.handle }} className="block">
-          <div className="font-mono text-[9px] uppercase tracking-[0.24em] text-ink-muted">
+          <div className="font-mono text-[8px] md:text-[9px] uppercase tracking-[0.24em] text-ink-muted">
             {product.vendor || "Spares Automation"}
           </div>
-          <h3 className="mt-2 font-display text-[16px] font-bold uppercase leading-tight tracking-tight text-ink transition-colors group-hover:text-accent">
+          <h3 className="mt-1 md:mt-2 font-display text-[14px] md:text-[16px] font-bold uppercase leading-tight tracking-tight text-ink transition-colors group-hover:text-accent">
             {product.title}
           </h3>
         </Link>
-        <p className="mt-3 line-clamp-3 text-[13px] leading-relaxed text-ink-muted">
+        <p className="mt-2 md:mt-3 line-clamp-3 text-[12px] md:text-[13px] leading-relaxed text-ink-muted">
           {product.description || "OEM-grade industrial spare available through Shopify inventory."}
         </p>
-        <div className="mt-auto flex items-end justify-between gap-4 pt-6">
+        <div className="mt-auto flex items-end justify-between gap-3 md:gap-4 pt-4 md:pt-6">
           <div>
-            <div className="font-mono text-[9px] uppercase tracking-[0.24em] text-ink-muted">
+            <div className="font-mono text-[8px] md:text-[9px] uppercase tracking-[0.24em] text-ink-muted">
               Trade Price
             </div>
-            <div className="mt-1 font-display text-lg font-bold text-ink">
+            <div className="mt-1 font-display text-base md:text-lg font-bold text-ink">
               {formatProductPrice(product)}
             </div>
           </div>
           <AddToCartButton
             variantId={firstAvailableVariant?.id ?? ""}
             disabled={!firstAvailableVariant || !product.availableForSale}
-            className="inline-flex h-10 shrink-0 items-center justify-center gap-2 bg-charcoal px-4 font-mono text-[9px] uppercase tracking-[0.2em] text-white transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex h-9 md:h-10 shrink-0 items-center justify-center gap-2 bg-charcoal px-3 md:px-4 font-mono text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-white transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
           >
             {product.availableForSale ? "Add" : "Sold Out"}
           </AddToCartButton>

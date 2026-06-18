@@ -65,47 +65,47 @@ function AccountPage() {
   return (
     <div className="min-h-screen bg-background text-ink">
       <SiteHeader />
-      <main className="mx-auto max-w-[1200px] px-6 py-12">
-        <div className="mb-8">
+      <main className="mx-auto max-w-[1200px] px-4 py-8 md:px-6 md:py-12">
+        <div className="mb-6 md:mb-8">
           <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-muted">
             Shopify Customer Account
           </div>
-          <h1 className="mt-2 font-display text-4xl font-extrabold uppercase tracking-tight">
+          <h1 className="mt-2 font-display text-2xl md:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight">
             Account
           </h1>
         </div>
 
         {loading ? (
-          <div className="border border-rule bg-surface px-8 py-16 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-ink-muted">
+          <div className="border border-rule bg-surface px-4 py-12 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-ink-muted md:px-8 md:py-16">
             Loading account
           </div>
         ) : !isLoggedIn ? (
-          <section className="border border-rule bg-surface p-8">
-            <User className="mb-5 h-8 w-8 text-accent" />
-            <h2 className="font-display text-2xl font-bold uppercase tracking-tight">
+          <section className="border border-rule bg-surface p-5 md:p-8">
+            <User className="mb-4 md:mb-5 h-7 w-7 md:h-8 md:w-8 text-accent" />
+            <h2 className="font-display text-xl md:text-2xl font-bold uppercase tracking-tight">
               Sign in to view your trade account
             </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-muted">
+            <p className="mt-3 md:mt-4 max-w-2xl text-sm leading-relaxed text-ink-muted">
               Customer account access is handled by Shopify, then returned securely to this site.
             </p>
             <Link
               to="/login"
-              className="mt-8 inline-flex h-11 items-center justify-center bg-accent px-5 font-mono text-[10px] uppercase tracking-[0.22em] text-accent-foreground transition-colors hover:bg-accent/90"
+              className="mt-6 md:mt-8 inline-flex h-11 items-center justify-center bg-accent px-5 font-mono text-[10px] uppercase tracking-[0.22em] text-accent-foreground transition-colors hover:bg-accent/90"
             >
               Sign in
             </Link>
           </section>
         ) : (
-          <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-            <section className="border border-rule bg-surface p-8">
-              <div className="mb-6 flex h-12 w-12 items-center justify-center bg-accent text-accent-foreground">
-                <User className="h-5 w-5" />
+          <div className="grid gap-4 md:gap-6 lg:grid-cols-[1fr_360px]">
+            <section className="border border-rule bg-surface p-5 md:p-8">
+              <div className="mb-4 md:mb-6 flex h-11 w-11 md:h-12 md:w-12 items-center justify-center bg-accent text-accent-foreground">
+                <User className="h-4 w-4 md:h-5 md:w-5" />
               </div>
-              <h2 className="font-display text-2xl font-bold uppercase tracking-tight">
+              <h2 className="font-display text-xl md:text-2xl font-bold uppercase tracking-tight">
                 {displayName}
               </h2>
               {email && (
-                <p className="mt-3 text-sm text-ink-muted">
+                <p className="mt-2 md:mt-3 text-sm text-ink-muted">
                   {email}
                 </p>
               )}
@@ -116,18 +116,18 @@ function AccountPage() {
               )}
             </section>
 
-            <aside className="space-y-4">
+            <aside className="space-y-3 md:space-y-4">
               <Link
                 to="/products"
-                className="flex items-center justify-between border border-rule bg-surface p-5 text-sm font-semibold uppercase tracking-[0.08em] transition-colors hover:border-accent hover:text-accent"
+                className="flex items-center justify-between border border-rule bg-surface p-4 md:p-5 text-sm font-semibold uppercase tracking-[0.08em] transition-colors hover:border-accent hover:text-accent"
               >
-                Browse catalogue <PackageSearch className="h-4 w-4" />
+                Browse catalogue <PackageSearch className="h-3 w-3 md:h-4 md:w-4" />
               </Link>
               <button
                 onClick={handleLogout}
-                className="flex w-full items-center justify-between border border-rule bg-surface p-5 text-sm font-semibold uppercase tracking-[0.08em] transition-colors hover:border-accent hover:text-accent"
+                className="flex w-full items-center justify-between border border-rule bg-surface p-4 md:p-5 text-sm font-semibold uppercase tracking-[0.08em] transition-colors hover:border-accent hover:text-accent"
               >
-                Sign out <LogOut className="h-4 w-4" />
+                Sign out <LogOut className="h-3 w-3 md:h-4 md:w-4" />
               </button>
             </aside>
           </div>

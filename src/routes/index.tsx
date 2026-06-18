@@ -1,12 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
-  Search,
   ChevronRight,
-  User,
-  UserPlus,
-  Phone,
-  Globe,
   Mail,
   MapPin,
   Linkedin,
@@ -17,6 +12,7 @@ import {
   Factory,
   CreditCard,
 } from "lucide-react";
+import { SiteHeader } from "@/components/shopify/SiteHeader";
 import asphalt from "@/assets/asphalt-plant.jpg";
 import concrete from "@/assets/concrete-plant.jpg";
 import catConcrete from "@/assets/cat-concrete.jpg";
@@ -62,7 +58,7 @@ const categories = [
   { n: "01", t: "Concrete Product Machines", c: "Mixers · Pumps · Vibrators", img: catConcrete, to: "/concrete" },
   { n: "02", t: "Packing Machines", c: "Sealers · Rollers · Bearings", img: catPacking, to: "/packing" },
   { n: "03", t: "Automation & Drives", c: "VFDs · Servos · PLCs", img: catAutomation, to: "/automation" },
-  { n: "04", t: "Home Automation & Controls", c: "Modules · Sensors · Relays", img: catHome, to: "/home-controls" },
+  { n: "04", t: "Home Controls", c: "Modules · Sensors · Relays", img: catHome, to: "/home-controls" },
 ];
 
 function Home() {
@@ -72,66 +68,7 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-background text-ink">
-      {/* ===== FIXED HEADER BLOCK ===== */}
-      <header className="sticky top-0 z-50">
-        {/* Utility row */}
-        <div className="bg-charcoal-deep text-white/80">
-          <div className="mx-auto flex h-9 max-w-[1600px] items-center justify-between px-6 font-mono text-[11px] uppercase tracking-[0.18em]">
-            <div className="flex items-center gap-6">
-              <span className="flex items-center gap-2"><Globe className="h-3 w-3 text-accent" /> UK · EN-GB · GBP</span>
-              <span className="hidden md:flex items-center gap-2 text-white/50"><Phone className="h-3 w-3" /> +44 (0)161 818 7420 · Mon–Fri 07:30–18:00 GMT</span>
-            </div>
-            <div className="flex items-center gap-6">
-              <Link to="/login" className="flex items-center gap-1.5 text-white/70 transition-colors hover:text-accent">
-                <User className="h-3 w-3" /> Sign In
-              </Link>
-              <span className="h-3 w-px bg-white/15" />
-              <Link to="/register" className="flex items-center gap-1.5 text-white/70 transition-colors hover:text-accent">
-                <UserPlus className="h-3 w-3" /> Register
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Main header */}
-        <div className="border-b border-rule bg-charcoal">
-          <div className="mx-auto grid h-20 max-w-[1600px] grid-cols-12 items-center gap-6 px-6">
-            {/* Logo */}
-            <Link to="/" className="col-span-3 flex items-center gap-3">
-              <div className="relative h-9 w-9">
-                <div className="absolute inset-0 rotate-45 border-2 border-accent" />
-                <div className="absolute inset-[6px] rotate-45 bg-accent" />
-              </div>
-              <div className="leading-none">
-                <div className="font-display text-[17px] font-bold tracking-tight text-white uppercase">
-                  SPARES<span className="text-accent">.</span>AUTOMATION
-                </div>
-                <div className="mt-1 font-mono text-[9px] uppercase tracking-[0.28em] text-white/45">
-                  Industrial Procurement Platform
-                </div>
-              </div>
-            </Link>
-
-            {/* Search — 75% */}
-            <div className="col-span-9">
-              <label className="group flex h-12 items-center gap-3 border border-white/10 bg-white/[0.04] pl-4 pr-1 transition-colors focus-within:border-accent">
-                <Search className="h-4 w-4 text-white/50" />
-                <input
-                  type="text"
-                  placeholder="Enter Part or Manufacturer Number to Search..."
-                  className="flex-1 bg-transparent font-mono text-[13px] tracking-wide text-white placeholder:text-white/40 focus:outline-none"
-                />
-                <span className="hidden md:flex h-9 items-center border-l border-white/10 px-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
-                  ⌘ K
-                </span>
-                <button className="flex h-10 items-center gap-2 bg-accent px-6 font-mono text-[11px] uppercase tracking-[0.22em] text-accent-foreground transition-colors hover:bg-accent/90">
-                  Search Catalog
-                </button>
-              </label>
-            </div>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* ===== HERO 2-COLUMN SPLIT ===== */}
       <section className="grid w-full grid-cols-1 md:grid-cols-2">
@@ -139,7 +76,7 @@ function Home() {
         <div 
           onMouseEnter={() => setHover("asphalt")}
           onMouseLeave={() => setHover(null)}
-          className="group relative h-[70vh] min-h-[520px] overflow-hidden text-left"
+          className="group relative h-[50vh] md:h-[70vh] min-h-[400px] overflow-hidden text-left"
         >
           <img
             src={asphalt}
@@ -150,17 +87,17 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep/70 to-transparent transition-opacity duration-700 group-hover:from-charcoal-deep/90" />
 
           {/* Index marker */}
-          <div className="absolute left-10 top-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/60 transition-all duration-700 group-hover:opacity-0 group-hover:blur-md">
+          <div className="absolute left-4 md:left-10 top-4 md:top-10 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60 transition-all duration-700 group-hover:opacity-0 group-hover:blur-md">
             <span className="h-px w-8 bg-accent" />
             Vertical 01 / Bituminous
           </div>
 
           {/* Title - Main Link */}
-          <Link to="/asphalt" className="absolute bottom-0 left-0 right-0 p-10 transition-all duration-700 group-hover:opacity-0 group-hover:blur-xl block z-10">
-            <h2 className="font-display text-[clamp(2.25rem,4.6vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.02em] text-white">
+          <Link to="/asphalt" className="absolute bottom-0 left-0 right-0 p-6 md:p-10 transition-all duration-700 group-hover:opacity-0 group-hover:blur-xl block z-10">
+            <h2 className="font-display text-[clamp(1.75rem,6vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.02em] text-white">
               ASPHALT /<br />BLACKTOP <span className="text-accent">SPARES</span>
             </h2>
-            <div className="mt-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-white/70">
+            <div className="mt-6 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.28em] text-white/70">
               Browse Sub-Categories
               <ChevronRight className="h-3.5 w-3.5 text-accent transition-transform group-hover:translate-x-1" />
             </div>
@@ -168,7 +105,7 @@ function Home() {
 
           {/* Interactive sub-category panel */}
           <div
-            className={`pointer-events-none absolute inset-x-6 bottom-6 top-24 flex flex-col transition-all duration-500 ease-out z-20 ${
+            className={`pointer-events-none absolute inset-x-4 md:inset-x-6 bottom-4 md:bottom-6 top-24 flex flex-col transition-all duration-500 ease-out z-20 ${
               hover === "asphalt" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
             }`}
           >
@@ -180,7 +117,7 @@ function Home() {
                 {asphaltSubs[activeA].code} · {asphaltSubs[activeA].skus} SKUs
               </span>
             </div>
-            <div className="pointer-events-auto mt-4 grid flex-1 grid-cols-2 gap-2 content-start">
+            <div className="pointer-events-auto mt-4 grid flex-1 grid-cols-1 sm:grid-cols-2 gap-2 content-start">
               {asphaltSubs.map((s, i) => (
                 <Link
                   key={s.code}
@@ -229,7 +166,7 @@ function Home() {
         <div 
           onMouseEnter={() => setHover("concrete")}
           onMouseLeave={() => setHover(null)}
-          className="group relative h-[70vh] min-h-[520px] overflow-hidden text-left"
+          className="group relative h-[50vh] md:h-[70vh] min-h-[400px] overflow-hidden text-left"
         >
           <img
             src={concrete}
@@ -239,23 +176,23 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-l from-charcoal-deep/85 via-charcoal-deep/55 to-charcoal-deep/20 transition-opacity duration-700 group-hover:from-charcoal-deep/95 group-hover:via-charcoal-deep/75" />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep/70 to-transparent transition-opacity duration-700 group-hover:from-charcoal-deep/90" />
 
-          <div className="absolute right-10 top-10 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-white/60 transition-all duration-700 group-hover:opacity-0 group-hover:blur-md">
+          <div className="absolute right-4 md:right-10 top-4 md:top-10 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60 transition-all duration-700 group-hover:opacity-0 group-hover:blur-md">
             Vertical 02 / Cementitious
             <span className="h-px w-8 bg-amber" />
           </div>
 
-          <Link to="/concrete" className="absolute bottom-0 left-0 right-0 p-10 text-right transition-all duration-700 group-hover:opacity-0 group-hover:blur-xl block z-10">
-            <h2 className="font-display text-[clamp(2.25rem,4.6vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.02em] text-white">
+          <Link to="/concrete" className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-right transition-all duration-700 group-hover:opacity-0 group-hover:blur-xl block z-10">
+            <h2 className="font-display text-[clamp(1.75rem,6vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.02em] text-white">
               READY-MIX /<br />CONCRETE <span className="text-amber">SPARES</span>
             </h2>
-            <div className="mt-6 flex items-center justify-end gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-white/70">
+            <div className="mt-6 flex items-center justify-end gap-3 font-mono text-[10px] uppercase tracking-[0.28em] text-white/70">
               Browse Sub-Categories
               <ChevronRight className="h-3.5 w-3.5 text-amber transition-transform group-hover:translate-x-1" />
             </div>
           </Link>
 
           <div
-            className={`pointer-events-none absolute inset-x-6 bottom-6 top-24 flex flex-col transition-all duration-500 ease-out z-20 ${
+            className={`pointer-events-none absolute inset-x-4 md:inset-x-6 bottom-4 md:bottom-6 top-24 flex flex-col transition-all duration-500 ease-out z-20 ${
               hover === "concrete" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
             }`}
           >
@@ -267,7 +204,7 @@ function Home() {
                 Sub-Categories · 06
               </span>
             </div>
-            <div className="pointer-events-auto mt-4 grid flex-1 grid-cols-2 gap-2 content-start">
+            <div className="pointer-events-auto mt-4 grid flex-1 grid-cols-1 sm:grid-cols-2 gap-2 content-start">
               {concreteSubs.map((s, i) => (
                 <Link
                   key={s.code}
@@ -314,17 +251,17 @@ function Home() {
       </section>
 
       {/* ===== 4-COLUMN COLLECTION GRID ===== */}
-      <section className="grid grid-cols-2 md:grid-cols-4">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {categories.map((cat, i) => (
           <Link
             key={cat.t}
             to={cat.to}
             className={`group relative flex aspect-square flex-col border-rule bg-surface ${
               i !== 0 ? "border-l" : ""
-            } border-b md:border-b-0`}
+            } border-b`}
           >
             {/* Photo */}
-            <div className="relative flex-1 overflow-hidden bg-[oklch(0.96_0.005_250)]">
+            <div className="relative flex-1 overflow-hidden bg-[oklch(0.96 0.005 250)]">
               <img
                 src={cat.img}
                 alt={cat.t}
@@ -361,9 +298,9 @@ function Home() {
             ["Avg. Dispatch", "27h"],
             ["Procurement Uptime", "99.98%"],
           ].map(([k, v]) => (
-            <div key={k} className="bg-charcoal-deep px-8 py-8">
+            <div key={k} className="bg-charcoal-deep px-6 md:px-8 py-8">
               <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">{k}</div>
-              <div className="mt-3 font-display text-3xl font-bold text-white">{v}</div>
+              <div className="mt-3 font-display text-2xl md:text-3xl font-bold text-white">{v}</div>
             </div>
           ))}
         </div>
@@ -371,14 +308,14 @@ function Home() {
 
       {/* ===== TRUST STRIP ===== */}
       <section className="border-t border-white/5 bg-charcoal">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-2 gap-px bg-white/5 md:grid-cols-4">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
           {[
             { icon: Truck, t: "Next-Working-Day UK", c: "Order by 16:00 GMT · DPD & Tuffnells", to: "/contact-us" },
             { icon: Factory, t: "OEM-Grade Spares", c: "Genuine & approved equivalents", to: "/about-us" },
             { icon: ShieldCheck, t: "12-Month Warranty", c: "On all stocked line items", to: "/contact-us" },
             { icon: CreditCard, t: "30-Day Trade Account", c: "Subject to credit check", to: "/contact-us" },
           ].map(({ icon: Icon, t, c, to }) => (
-            <Link key={t} to={to} className="flex items-start gap-4 bg-charcoal px-8 py-7 transition-colors hover:bg-white/[0.02]">
+            <Link key={t} to={to} className="flex items-start gap-4 bg-charcoal px-6 md:px-8 py-7 transition-colors hover:bg-white/[0.02]">
               <Icon className="h-5 w-5 shrink-0 text-accent" />
               <div>
                 <div className="font-display text-[13px] font-bold uppercase tracking-tight text-white">{t}</div>
@@ -391,9 +328,9 @@ function Home() {
 
       {/* ===== FOOTER ===== */}
       <footer className="border-t border-white/5 bg-charcoal-deep text-white/70">
-        <div className="mx-auto max-w-[1600px] px-6 py-20">
+        <div className="mx-auto max-w-[1600px] px-6 py-16 md:py-20">
           {/* Newsletter & Payments Section (Top) */}
-          <div className="mb-20 grid grid-cols-1 gap-12 lg:grid-cols-2">
+          <div className="mb-16 grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div>
               <div className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/30">
                 Trade Bulletin
@@ -405,17 +342,17 @@ function Home() {
                 Monthly stock alerts, OEM updates and procurement insights — exclusive for UK trade accounts.
               </p>
               <form className="mt-8 max-w-md" onSubmit={(e) => e.preventDefault()}>
-                <div className="flex h-14 items-center gap-2 border border-white/10 bg-white/[0.02] pl-5 pr-1 transition-colors focus-within:border-accent">
-                  <Mail className="h-4 w-4 text-white/30" />
+                <div className="flex flex-col gap-3 md:flex-row h-auto md:h-14 items-start md:items-center gap-2 border border-white/10 bg-white/[0.04] pl-5 pr-1 transition-colors focus-within:border-accent">
+                  <Mail className="h-4 w-4 text-white/30 mt-4 md:mt-0" />
                   <input
                     type="email"
                     required
                     placeholder="business.email@company.co.uk"
-                    className="flex-1 bg-transparent font-mono text-[12px] tracking-wide text-white placeholder:text-white/20 focus:outline-none"
+                    className="flex-1 w-full bg-transparent font-mono text-[12px] tracking-wide text-white placeholder:text-white/20 focus:outline-none py-4 md:py-0"
                   />
                   <button
                     type="submit"
-                    className="h-12 bg-accent px-8 font-mono text-[11px] uppercase tracking-[0.22em] text-accent-foreground transition-all hover:bg-accent/90"
+                    className="w-full md:w-auto h-12 bg-accent px-8 font-mono text-[11px] uppercase tracking-[0.22em] text-accent-foreground transition-colors hover:bg-accent/90"
                   >
                     Subscribe
                   </button>
@@ -504,7 +441,7 @@ function Home() {
               <div className="mt-10 space-y-4">
                 <Link to="/contact-us" className="flex items-center gap-4 text-white/40 transition-colors hover:text-accent group">
                   <div className="flex h-10 w-10 items-center justify-center border border-white/10 group-hover:border-accent/30 transition-colors">
-                    <Phone className="h-4 w-4" />
+                    <MapPin className="h-4 w-4" />
                   </div>
                   <div>
                     <div className="font-mono text-[9px] uppercase tracking-widest text-white/30">Sales Desk</div>

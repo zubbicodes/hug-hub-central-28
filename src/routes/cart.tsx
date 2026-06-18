@@ -72,13 +72,13 @@ function CartPage() {
     <div className="min-h-screen bg-background text-ink">
       <SiteHeader />
 
-      <main className="mx-auto max-w-[1600px] px-6 py-12">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <main className="mx-auto max-w-[1600px] px-4 py-8 md:px-6 md:py-12">
+        <div className="mb-6 md:mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-muted">
               Shopify Checkout
             </div>
-            <h1 className="mt-2 font-display text-4xl font-extrabold uppercase tracking-tight">
+            <h1 className="mt-2 font-display text-2xl md:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight">
               Trade Cart
             </h1>
           </div>
@@ -91,15 +91,15 @@ function CartPage() {
         </div>
 
         {loading ? (
-          <div className="border border-rule bg-surface px-8 py-16 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-ink-muted">
+          <div className="border border-rule bg-surface px-4 py-12 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-ink-muted md:px-8 md:py-16">
             Loading cart
           </div>
         ) : isEmpty ? (
-          <div className="border border-dashed border-rule bg-surface px-8 py-16 text-center">
+          <div className="border border-dashed border-rule bg-surface px-4 py-12 text-center md:px-8 md:py-16">
             <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center bg-accent text-accent-foreground">
               <ShoppingCart className="h-5 w-5" />
             </div>
-            <h2 className="font-display text-2xl font-bold uppercase tracking-tight">
+            <h2 className="font-display text-xl md:text-2xl font-bold uppercase tracking-tight">
               Your cart is empty
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink-muted">
@@ -108,12 +108,12 @@ function CartPage() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_420px]">
-            <section className="space-y-4">
+          <div className="grid grid-cols-1 gap-6 lg:gap-8 lg:grid-cols-[1fr_420px]">
+            <section className="space-y-3 md:space-y-4">
               {cart.lines.map((line) => (
                 <article
                   key={line.id}
-                  className="grid grid-cols-[96px_1fr] gap-5 border border-rule bg-surface p-4 md:grid-cols-[120px_1fr_auto]"
+                  className="grid grid-cols-[72px_1fr] gap-4 border border-rule bg-surface p-3 md:grid-cols-[96px_1fr] md:gap-5 md:p-4 lg:grid-cols-[120px_1fr_auto]"
                 >
                   <Link
                     to="/products/$handle"
@@ -135,48 +135,48 @@ function CartPage() {
                     <Link
                       to="/products/$handle"
                       params={{ handle: line.merchandise.product.handle }}
-                      className="font-display text-lg font-bold uppercase tracking-tight transition-colors hover:text-accent"
+                      className="font-display text-base md:text-lg font-bold uppercase tracking-tight transition-colors hover:text-accent"
                     >
                       {line.merchandise.product.title}
                     </Link>
                     <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-muted">
                       {line.merchandise.title}
                     </div>
-                    <div className="mt-5 flex items-center gap-2">
+                    <div className="mt-4 md:mt-5 flex flex-wrap items-center gap-2">
                       <button
                         type="button"
                         disabled={busyLineId === line.id || line.quantity <= 1}
                         onClick={() => updateLine(line.id, line.quantity - 1)}
-                        className="flex h-9 w-9 items-center justify-center border border-rule text-ink transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
+                        className="flex h-8 w-8 md:h-9 md:w-9 items-center justify-center border border-rule text-ink transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
                       >
-                        <Minus className="h-4 w-4" />
+                        <Minus className="h-3 w-3 md:h-4 md:w-4" />
                       </button>
-                      <span className="flex h-9 min-w-12 items-center justify-center border border-rule px-3 font-mono text-sm">
+                      <span className="flex h-8 min-w-10 md:h-9 md:min-w-12 items-center justify-center border border-rule px-2 md:px-3 font-mono text-sm">
                         {line.quantity}
                       </span>
                       <button
                         type="button"
                         disabled={busyLineId === line.id}
                         onClick={() => updateLine(line.id, line.quantity + 1)}
-                        className="flex h-9 w-9 items-center justify-center border border-rule text-ink transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
+                        className="flex h-8 w-8 md:h-9 md:w-9 items-center justify-center border border-rule text-ink transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
                       >
-                        <Plus className="h-4 w-4" />
+                        <Plus className="h-3 w-3 md:h-4 md:w-4" />
                       </button>
                       <button
                         type="button"
                         disabled={busyLineId === line.id}
                         onClick={() => removeLine(line.id)}
-                        className="ml-2 flex h-9 w-9 items-center justify-center border border-rule text-ink-muted transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
+                        className="ml-2 flex h-8 w-8 md:h-9 md:w-9 items-center justify-center border border-rule text-ink-muted transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-3 w-3 md:h-4 md:w-4" />
                       </button>
                     </div>
                   </div>
-                  <div className="col-span-2 text-left md:col-span-1 md:text-right">
+                  <div className="col-span-2 mt-3 flex justify-between md:col-span-1 md:mt-0 md:text-right">
                     <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-muted">
                       Line total
                     </div>
-                    <div className="mt-2 font-display text-xl font-bold">
+                    <div className="font-display text-lg md:text-xl font-bold">
                       {formatMoney(line.cost.totalAmount)}
                     </div>
                   </div>
@@ -184,7 +184,7 @@ function CartPage() {
               ))}
             </section>
 
-            <aside className="h-fit border border-rule bg-surface p-6">
+            <aside className="h-fit border border-rule bg-surface p-5 md:p-6">
               <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-muted">
                 Order Summary
               </div>
@@ -202,7 +202,7 @@ function CartPage() {
                 <span className="font-display text-lg font-bold uppercase tracking-tight">
                   Total
                 </span>
-                <span className="font-display text-2xl font-bold">
+                <span className="font-display text-xl md:text-2xl font-bold">
                   {formatMoney(cart.cost.totalAmount)}
                 </span>
               </div>
