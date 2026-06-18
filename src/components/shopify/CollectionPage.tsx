@@ -94,7 +94,7 @@ export function CollectionPage({
                 <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
               </div>
               <h3 className="font-display text-xl md:text-2xl font-bold uppercase tracking-tight">
-                No Shopify products found
+                No Products found
               </h3>
               <p className="mx-auto mt-3 md:mt-4 max-w-2xl text-sm leading-relaxed text-ink-muted">
                 Create a Shopify collection with handle{" "}
