@@ -82,11 +82,11 @@ function Home() {
               <span className="hidden md:flex items-center gap-2 text-white/50"><Phone className="h-3 w-3" /> +44 (0)161 818 7420 · Mon–Fri 07:30–18:00 GMT</span>
             </div>
             <div className="flex items-center gap-6">
-              <Link to="/contact-us" className="flex items-center gap-1.5 text-white/70 transition-colors hover:text-accent">
+              <Link to="/login" className="flex items-center gap-1.5 text-white/70 transition-colors hover:text-accent">
                 <User className="h-3 w-3" /> Sign In
               </Link>
               <span className="h-3 w-px bg-white/15" />
-              <Link to="/contact-us" className="flex items-center gap-1.5 text-white/70 transition-colors hover:text-accent">
+              <Link to="/register" className="flex items-center gap-1.5 text-white/70 transition-colors hover:text-accent">
                 <UserPlus className="h-3 w-3" /> Register
               </Link>
             </div>
@@ -542,6 +542,7 @@ function Home() {
                 {
                   h: "Catalogue",
                   links: [
+                    { n: "All Products", to: "/products" },
                     { n: "Asphalt Spares", to: "/asphalt" },
                     { n: "Concrete Spares", to: "/concrete" },
                     { n: "Packing Machinery", to: "/packing" },
@@ -553,7 +554,7 @@ function Home() {
                 {
                   h: "Trade Services",
                   links: [
-                    { n: "Trade Account", to: "/contact-us" },
+                    { n: "Trade Account", to: "/account" },
                     { n: "Bulk Pricing", to: "/contact-us" },
                     { n: "Dispatch Info", to: "/contact-us" },
                     { n: "Engineer Call-Out", to: "/contact-us" },

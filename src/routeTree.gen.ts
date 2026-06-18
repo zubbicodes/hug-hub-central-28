@@ -9,16 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PackingRouteImport } from './routes/packing'
 import { Route as NewArrivalsRouteImport } from './routes/new-arrivals'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as HomeControlsRouteImport } from './routes/home-controls'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as ConcreteRouteImport } from './routes/concrete'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as AutomationRouteImport } from './routes/automation'
 import { Route as AsphaltRouteImport } from './routes/asphalt'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products/index'
+import { Route as ProductsHandleRouteImport } from './routes/products/$handle'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PackingRoute = PackingRouteImport.update({
   id: '/packing',
   path: '/packing',
@@ -27,6 +45,11 @@ const PackingRoute = PackingRouteImport.update({
 const NewArrivalsRoute = NewArrivalsRouteImport.update({
   id: '/new-arrivals',
   path: '/new-arrivals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HomeControlsRoute = HomeControlsRouteImport.update({
@@ -44,6 +67,11 @@ const ConcreteRoute = ConcreteRouteImport.update({
   path: '/concrete',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AutomationRoute = AutomationRouteImport.update({
   id: '/automation',
   path: '/automation',
@@ -52,6 +80,11 @@ const AutomationRoute = AutomationRouteImport.update({
 const AsphaltRoute = AsphaltRouteImport.update({
   id: '/asphalt',
   path: '/asphalt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutUsRoute = AboutUsRouteImport.update({
@@ -64,91 +97,176 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsHandleRoute = ProductsHandleRouteImport.update({
+  id: '/products/$handle',
+  path: '/products/$handle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/account': typeof AccountRoute
   '/asphalt': typeof AsphaltRoute
   '/automation': typeof AutomationRoute
+  '/cart': typeof CartRoute
   '/concrete': typeof ConcreteRoute
   '/contact-us': typeof ContactUsRoute
   '/home-controls': typeof HomeControlsRoute
+  '/login': typeof LoginRoute
   '/new-arrivals': typeof NewArrivalsRoute
   '/packing': typeof PackingRoute
+  '/register': typeof RegisterRoute
+  '/search': typeof SearchRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/products/$handle': typeof ProductsHandleRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/account': typeof AccountRoute
   '/asphalt': typeof AsphaltRoute
   '/automation': typeof AutomationRoute
+  '/cart': typeof CartRoute
   '/concrete': typeof ConcreteRoute
   '/contact-us': typeof ContactUsRoute
   '/home-controls': typeof HomeControlsRoute
+  '/login': typeof LoginRoute
   '/new-arrivals': typeof NewArrivalsRoute
   '/packing': typeof PackingRoute
+  '/register': typeof RegisterRoute
+  '/search': typeof SearchRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/products/$handle': typeof ProductsHandleRoute
+  '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about-us': typeof AboutUsRoute
+  '/account': typeof AccountRoute
   '/asphalt': typeof AsphaltRoute
   '/automation': typeof AutomationRoute
+  '/cart': typeof CartRoute
   '/concrete': typeof ConcreteRoute
   '/contact-us': typeof ContactUsRoute
   '/home-controls': typeof HomeControlsRoute
+  '/login': typeof LoginRoute
   '/new-arrivals': typeof NewArrivalsRoute
   '/packing': typeof PackingRoute
+  '/register': typeof RegisterRoute
+  '/search': typeof SearchRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/products/$handle': typeof ProductsHandleRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about-us'
+    | '/account'
     | '/asphalt'
     | '/automation'
+    | '/cart'
     | '/concrete'
     | '/contact-us'
     | '/home-controls'
+    | '/login'
     | '/new-arrivals'
     | '/packing'
+    | '/register'
+    | '/search'
+    | '/auth/callback'
+    | '/products/$handle'
+    | '/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about-us'
+    | '/account'
     | '/asphalt'
     | '/automation'
+    | '/cart'
     | '/concrete'
     | '/contact-us'
     | '/home-controls'
+    | '/login'
     | '/new-arrivals'
     | '/packing'
+    | '/register'
+    | '/search'
+    | '/auth/callback'
+    | '/products/$handle'
+    | '/products'
   id:
     | '__root__'
     | '/'
     | '/about-us'
+    | '/account'
     | '/asphalt'
     | '/automation'
+    | '/cart'
     | '/concrete'
     | '/contact-us'
     | '/home-controls'
+    | '/login'
     | '/new-arrivals'
     | '/packing'
+    | '/register'
+    | '/search'
+    | '/auth/callback'
+    | '/products/$handle'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutUsRoute: typeof AboutUsRoute
+  AccountRoute: typeof AccountRoute
   AsphaltRoute: typeof AsphaltRoute
   AutomationRoute: typeof AutomationRoute
+  CartRoute: typeof CartRoute
   ConcreteRoute: typeof ConcreteRoute
   ContactUsRoute: typeof ContactUsRoute
   HomeControlsRoute: typeof HomeControlsRoute
+  LoginRoute: typeof LoginRoute
   NewArrivalsRoute: typeof NewArrivalsRoute
   PackingRoute: typeof PackingRoute
+  RegisterRoute: typeof RegisterRoute
+  SearchRoute: typeof SearchRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
+  ProductsHandleRoute: typeof ProductsHandleRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/packing': {
       id: '/packing'
       path: '/packing'
@@ -161,6 +279,13 @@ declare module '@tanstack/react-router' {
       path: '/new-arrivals'
       fullPath: '/new-arrivals'
       preLoaderRoute: typeof NewArrivalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/home-controls': {
@@ -184,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConcreteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/automation': {
       id: '/automation'
       path: '/automation'
@@ -196,6 +328,13 @@ declare module '@tanstack/react-router' {
       path: '/asphalt'
       fullPath: '/asphalt'
       preLoaderRoute: typeof AsphaltRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about-us': {
@@ -212,19 +351,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/$handle': {
+      id: '/products/$handle'
+      path: '/products/$handle'
+      fullPath: '/products/$handle'
+      preLoaderRoute: typeof ProductsHandleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutUsRoute: AboutUsRoute,
+  AccountRoute: AccountRoute,
   AsphaltRoute: AsphaltRoute,
   AutomationRoute: AutomationRoute,
+  CartRoute: CartRoute,
   ConcreteRoute: ConcreteRoute,
   ContactUsRoute: ContactUsRoute,
   HomeControlsRoute: HomeControlsRoute,
+  LoginRoute: LoginRoute,
   NewArrivalsRoute: NewArrivalsRoute,
   PackingRoute: PackingRoute,
+  RegisterRoute: RegisterRoute,
+  SearchRoute: SearchRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
+  ProductsHandleRoute: ProductsHandleRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

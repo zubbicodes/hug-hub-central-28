@@ -15,6 +15,14 @@ dist-ssr
 .tanstack/**
 .nitro
 *.local
+.env
+.env.*
+!.env.example
+
+# Local AI/tool caches
+.agents/
+.claude/
+skills-lock.json
 
 # Wrangler / Cloudflare
 .wrangler/
