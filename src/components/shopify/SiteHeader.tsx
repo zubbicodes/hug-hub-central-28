@@ -130,7 +130,7 @@ export function SiteHeader() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="bg-charcoal border-b border-white/10 px-4 py-4 md:hidden">
+        <div className="border-b border-white/10 bg-[oklch(0.285_0.012_250)] px-4 py-4 md:hidden">
           <div className="flex flex-col gap-4">
             {customer ? (
               <Link
@@ -163,7 +163,7 @@ export function SiteHeader() {
         </div>
       )}
 
-      <div className="border-b border-rule bg-charcoal">
+      <div className="border-b border-white/10 bg-[oklch(0.285_0.012_250)]">
         <div className="flex h-auto min-h-[5rem] w-full flex-col items-center gap-4 px-4 py-4 md:grid md:h-20 md:grid-cols-12 md:items-center md:gap-6 md:px-6 md:py-0">
           <Link to="/" className="flex items-center gap-3 md:col-span-3">
             <div className="relative h-9 w-9">
@@ -183,17 +183,17 @@ export function SiteHeader() {
           <div className="w-full md:col-span-9">
             <form
               action="/search"
-              className="group flex h-12 items-center gap-3 border border-white/10 bg-white/[0.04] pl-4 pr-1 transition-colors focus-within:border-accent"
+              className="group flex h-12 items-center gap-3 border border-white/20 bg-white/[0.08] pl-4 pr-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition-colors focus-within:border-accent focus-within:bg-white/[0.11]"
             >
-              <Search className="h-4 w-4 text-white/50" />
+              <Search className="h-4 w-4 text-accent/80" />
               <input
                 name="q"
                 type="search"
-                placeholder="Search parts..."
-                className="flex-1 bg-transparent font-mono text-[13px] tracking-wide text-white placeholder:text-white/40 focus:outline-none"
+                placeholder="Search / Part / Product Number"
+                className="flex-1 bg-transparent font-mono text-[13px] tracking-wide text-white placeholder:text-white/65 focus:outline-none"
               />
-              <span className="hidden h-9 items-center border-l border-white/10 px-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 md:flex">
-                Parts search
+              <span className="hidden h-9 items-center border-l border-white/15 px-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/55 md:flex">
+                Part / product no.
               </span>
               <button className="flex h-10 items-center gap-2 bg-accent px-4 font-mono text-[11px] uppercase tracking-[0.22em] text-accent-foreground transition-colors hover:bg-accent/90 md:px-6">
                 Search

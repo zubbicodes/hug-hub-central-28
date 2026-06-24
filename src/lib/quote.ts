@@ -36,6 +36,34 @@ export function productQuestionWhatsApp(product: ShopifyProduct, variant?: Shopi
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
+export function productQuoteMailto(
+  product: ShopifyProduct,
+  variant?: ShopifyVariant | null,
+  quantity = 1,
+) {
+  const body = [
+    "Hi Spares Automation,",
+    "",
+    "Please add this item to my quote:",
+    `Product: ${product.title}`,
+    `Brand: ${product.technicalDetails.brand ?? product.vendor ?? "Not specified"}`,
+    `MPN/Range: ${product.technicalDetails.mpnRange ?? variant?.sku ?? "Not specified"}`,
+    `Variant: ${variant?.title ?? "Default"}`,
+    `Quantity: ${quantity}`,
+    variant?.price ? `Unit price shown: ${formatMoney(variant.price)}` : "",
+    "",
+    "Name:",
+    "Company:",
+    "Phone:",
+    "Delivery postcode:",
+    "Notes:",
+  ]
+    .filter((line) => line !== "")
+    .join("\n");
+
+  return encodeMailto(`Quote item: ${product.title}`, body);
+}
+
 export function quoteRequestMailto(cart: ShopifyCart) {
   const lines = cart.lines.map((line, index) => {
     const sku = line.merchandise.sku ? `, SKU: ${line.merchandise.sku}` : "";
@@ -60,4 +88,3 @@ export function quoteRequestMailto(cart: ShopifyCart) {
 
   return encodeMailto("Quote request from website", body);
 }
-

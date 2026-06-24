@@ -5,8 +5,10 @@ import {
   HelpCircle,
   Mail,
   MessageCircle,
+  Minus,
   PackageCheck,
   PlayCircle,
+  Plus,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -15,7 +17,7 @@ import { SiteFooter } from "@/components/shopify/SiteFooter";
 import { SiteHeader } from "@/components/shopify/SiteHeader";
 import { formatMoney } from "@/lib/shopify/format";
 import type { ShopifyProduct, ShopifyVariant } from "@/lib/shopify/types";
-import { productQuestionMailto, productQuestionWhatsApp } from "@/lib/quote";
+import { productQuestionMailto, productQuestionWhatsApp, productQuoteMailto } from "@/lib/quote";
 
 type ProductDetailProps = {
   product: ShopifyProduct;
@@ -25,6 +27,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedVariantId, setSelectedVariantId] = useState(
     product.variants.find((variant) => variant.availableForSale)?.id ?? product.variants[0]?.id,
   );
+  const [quantity, setQuantity] = useState(1);
   const selectedVariant =
     product.variants.find((variant) => variant.id === selectedVariantId) ?? product.variants[0];
   const gallery = product.images.length
@@ -67,11 +70,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
               <StockBadge variant={selectedVariant} product={product} />
             </div>
 
-            <h1 className="mt-5 max-w-4xl font-display text-[2rem] font-extrabold uppercase leading-[1] tracking-tight text-ink md:text-[3.5rem] lg:text-[4.5rem]">
+            <h1 className="mt-4 max-w-3xl break-words font-display text-[1.55rem] font-extrabold uppercase leading-[1.08] tracking-normal text-ink sm:text-[1.85rem] md:mt-5 md:text-[2.45rem] lg:text-[3.15rem]">
               {product.title}
             </h1>
 
-            <div className="mt-6 grid grid-cols-1 gap-px bg-rule sm:grid-cols-3">
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
               <SpecBlock label="Brand" value={brand} />
               <SpecBlock label="MPN / Range" value={mpnRange} />
               <SpecBlock label="Product line" value={product.productType || "Industrial part"} />
@@ -110,20 +113,35 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </div>
             ) : null}
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <AddToCartButton
-                variantId={selectedVariant?.id ?? ""}
+            <div className="mt-8 space-y-3">
+              <QuantityStepper
+                value={quantity}
+                onChange={setQuantity}
                 disabled={!selectedVariant?.availableForSale}
-                className="inline-flex h-13 items-center justify-center gap-2 bg-accent px-6 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-foreground transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50 md:px-8"
-              >
-                {selectedVariant?.availableForSale ? "Add to Cart" : "Sold out"}
-              </AddToCartButton>
-              <Link
-                to="/cart"
-                className="inline-flex h-13 items-center justify-center border border-rule px-6 font-mono text-[11px] uppercase tracking-[0.18em] text-ink transition-colors hover:border-accent hover:text-accent md:px-8"
-              >
-                View Cart
-              </Link>
+              />
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <AddToCartButton
+                  variantId={selectedVariant?.id ?? ""}
+                  quantity={quantity}
+                  disabled={!selectedVariant?.availableForSale}
+                  className="inline-flex h-13 items-center justify-center gap-2 bg-accent px-5 font-mono text-[11px] uppercase tracking-[0.16em] text-accent-foreground transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {selectedVariant?.availableForSale ? "Add to Cart" : "Sold out"}
+                </AddToCartButton>
+                <a
+                  href={productQuoteMailto(product, selectedVariant, quantity)}
+                  className="inline-flex h-13 items-center justify-center gap-2 border border-accent bg-accent/5 px-5 font-mono text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  <FileText className="h-4 w-4" />
+                  Add to my quotes
+                </a>
+                <Link
+                  to="/cart"
+                  className="inline-flex h-13 items-center justify-center border border-rule px-5 font-mono text-[11px] uppercase tracking-[0.16em] text-ink transition-colors hover:border-accent hover:text-accent"
+                >
+                  View Cart
+                </Link>
+              </div>
             </div>
 
             <ProductResources product={product} />
@@ -133,6 +151,60 @@ export function ProductDetail({ product }: ProductDetailProps) {
       </main>
 
       <SiteFooter />
+    </div>
+  );
+}
+
+function QuantityStepper({
+  value,
+  onChange,
+  disabled,
+}: {
+  value: number;
+  onChange: (value: number) => void;
+  disabled?: boolean;
+}) {
+  const decrease = () => onChange(Math.max(1, value - 1));
+  const increase = () => onChange(Math.min(99, value + 1));
+
+  return (
+    <div className="flex h-13 w-full items-stretch border border-rule bg-surface sm:w-[210px]">
+      <div className="flex min-w-[52px] items-center justify-center border-r border-rule font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-ink-muted">
+        Qty
+      </div>
+      <button
+        type="button"
+        onClick={decrease}
+        disabled={disabled || value <= 1}
+        className="flex w-11 items-center justify-center text-ink transition-colors hover:bg-background hover:text-accent disabled:cursor-not-allowed disabled:text-ink-muted/35"
+        aria-label="Decrease quantity"
+      >
+        <Minus className="h-4 w-4" />
+      </button>
+      <input
+        value={value}
+        onChange={(event) => {
+          const nextValue = Number.parseInt(event.target.value, 10);
+          if (Number.isNaN(nextValue)) {
+            onChange(1);
+            return;
+          }
+          onChange(Math.min(99, Math.max(1, nextValue)));
+        }}
+        disabled={disabled}
+        inputMode="numeric"
+        aria-label="Quantity"
+        className="w-12 border-x border-rule bg-transparent text-center font-display text-base font-bold text-ink focus:outline-none disabled:text-ink-muted"
+      />
+      <button
+        type="button"
+        onClick={increase}
+        disabled={disabled || value >= 99}
+        className="flex w-11 items-center justify-center text-ink transition-colors hover:bg-background hover:text-accent disabled:cursor-not-allowed disabled:text-ink-muted/35"
+        aria-label="Increase quantity"
+      >
+        <Plus className="h-4 w-4" />
+      </button>
     </div>
   );
 }
@@ -229,9 +301,13 @@ function StockBadge({ variant, product }: { variant?: ShopifyVariant; product: S
 
 function SpecBlock({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-background p-4">
-      <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-ink-muted">{label}</div>
-      <div className="mt-2 text-sm font-semibold text-ink">{value}</div>
+    <div className="border border-rule bg-surface p-4 shadow-[inset_3px_0_0_var(--color-accent)] md:p-5">
+      <div className="font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-ink">
+        {label}
+      </div>
+      <div className="mt-3 break-words font-display text-[15px] font-bold leading-tight text-ink md:text-[17px]">
+        {value}
+      </div>
     </div>
   );
 }
