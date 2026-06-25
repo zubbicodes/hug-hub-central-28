@@ -54,7 +54,8 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </Link>
         </div>
 
-        <section className="grid grid-cols-1 gap-px bg-rule lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <section className="grid grid-cols-1 gap-px bg-rule lg:grid-rows-[auto_auto] lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+          {/* Row 1: Product Gallery and Product Info */}
           <ProductGallery
             productTitle={product.title}
             gallery={gallery}
@@ -62,7 +63,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
             onSelectImage={setActiveImage}
           />
 
-          <section className="bg-surface p-4 md:p-8 lg:p-12">
+          <section className="bg-surface p-4 md:p-8 lg:p-12 lg:row-span-2">
             <div className="flex flex-wrap items-center gap-3">
               <span className="border border-rule bg-background px-3 py-2 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-muted">
                 {brand}
@@ -144,9 +145,13 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </div>
             </div>
 
-            <ProductResources product={product} />
             <QuestionActions product={product} variant={selectedVariant} />
           </section>
+
+          {/* Row 2: Product Resources, same width as Product Gallery */}
+          <div className="bg-surface">
+            <ProductResources product={product} />
+          </div>
         </section>
       </main>
 
@@ -329,17 +334,51 @@ function ProductDescription({ product }: { product: ShopifyProduct }) {
   );
 }
 
+function extractYouTubeVideoId(url: string) {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11 ? match[2] : null;
+}
+
 function ProductResources({ product }: { product: ShopifyProduct }) {
   const resources = [
     ...product.technicalDetails.datasheets.map((resource) => ({ ...resource, type: "Datasheet" })),
     ...product.technicalDetails.manuals.map((resource) => ({ ...resource, type: "Manual" })),
   ];
 
-  if (!product.technicalDetails.setupVideoUrl && resources.length === 0) return null;
+  const hasAnyResource = 
+    product.technicalDetails.setupVideoUrl || 
+    product.technicalDetails.videoGuide || 
+    product.technicalDetails.pdfGuide || 
+    resources.length > 0;
+
+  if (!hasAnyResource) return null;
+
+  const videoGuide = product.technicalDetails.videoGuide;
+  const youtubeVideoId = videoGuide ? extractYouTubeVideoId(videoGuide.url) : null;
 
   return (
     <section className="mt-10 border-t border-rule pt-8">
       <h2 className="font-display text-lg font-bold uppercase tracking-tight">Product support</h2>
+      
+      {/* Video Preview (if YouTube) */}
+      {videoGuide && youtubeVideoId ? (
+        <div className="mt-6 border border-rule overflow-hidden bg-background">
+          <div className="aspect-video">
+            <iframe
+              width="100%"
+              height="100%"
+              src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+              title={videoGuide.text}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+        </div>
+      ) : null}
+      
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
         {product.technicalDetails.setupVideoUrl ? (
           <a
@@ -350,6 +389,28 @@ function ProductResources({ product }: { product: ShopifyProduct }) {
           >
             <PlayCircle className="h-5 w-5 text-accent" />
             Setup video
+          </a>
+        ) : null}
+        {videoGuide ? (
+          <a
+            href={videoGuide.url}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-3 border border-rule bg-background p-4 text-sm transition-colors hover:border-accent hover:text-accent"
+          >
+            <PlayCircle className="h-5 w-5 text-accent" />
+            {videoGuide.text}
+          </a>
+        ) : null}
+        {product.technicalDetails.pdfGuide ? (
+          <a
+            href={product.technicalDetails.pdfGuide.url}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-3 border border-rule bg-background p-4 text-sm transition-colors hover:border-accent hover:text-accent"
+          >
+            <FileText className="h-5 w-5 text-accent" />
+            {product.technicalDetails.pdfGuide.text}
           </a>
         ) : null}
         {resources.map((resource) => (

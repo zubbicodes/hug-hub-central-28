@@ -283,10 +283,10 @@ function Home() {
               <div className="grid grid-cols-1 gap-4">
                 <a
                   href="mailto:support@sparesautomation.com"
-                  className="flex items-center gap-4 px-7 py-5 bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
+                  className="relative flex items-center justify-center px-16 py-5 bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
                 >
-                  <Mail className="h-6 w-6" />
-                  <span className="font-mono text-sm uppercase tracking-[0.2em] font-bold">
+                  <Mail className="absolute left-7 h-6 w-6" />
+                  <span className="text-center font-mono text-sm uppercase tracking-[0.2em] font-bold">
                     Contact via Email
                   </span>
                 </a>
@@ -294,10 +294,10 @@ function Home() {
                   href="https://wa.me/1234567890"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 px-7 py-5 bg-[#25D366] text-white hover:bg-[#25D366]/90 transition-colors"
+                  className="relative flex items-center justify-center px-16 py-5 bg-[#25D366] text-white hover:bg-[#25D366]/90 transition-colors"
                 >
-                  <MessageSquare className="h-6 w-6" />
-                  <span className="font-mono text-sm uppercase tracking-[0.2em] font-bold">
+                  <MessageSquare className="absolute left-7 h-6 w-6" />
+                  <span className="text-center font-mono text-sm uppercase tracking-[0.2em] font-bold">
                     Contact via WhatsApp
                   </span>
                 </a>

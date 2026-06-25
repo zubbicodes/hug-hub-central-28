@@ -90,6 +90,22 @@ function parseResourceLinks(value?: string | null) {
   }
 }
 
+function parseProductResource(value: string | null | undefined) {
+  if (!value) return null;
+  try {
+    const parsed = JSON.parse(value);
+    if (parsed && typeof parsed === "object" && "url" in parsed && "text" in parsed) {
+      return {
+        text: parsed.text,
+        url: parsed.url,
+      };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 function normalizeTechnicalDetails(product: ProductConnectionShape) {
   const metafields = new Map(
     (product.metafields ?? [])
@@ -101,6 +117,8 @@ function normalizeTechnicalDetails(product: ProductConnectionShape) {
     brand: metafields.get("brand") ?? product.vendor ?? null,
     mpnRange: metafields.get("mpn_range") ?? product.variants.nodes[0]?.sku ?? null,
     setupVideoUrl: metafields.get("setup_video_url") ?? null,
+    videoGuide: parseProductResource(metafields.get("video_guide")),
+    pdfGuide: parseProductResource(metafields.get("pdf_guide")),
     datasheets: parseResourceLinks(metafields.get("datasheets")),
     manuals: parseResourceLinks(metafields.get("manuals")),
   };
